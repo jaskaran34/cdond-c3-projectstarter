@@ -45,9 +45,6 @@ Resources:
         - Ref: InstanceSecurityGroup
       KeyName: udacity 
       ImageId: ami-0b70285e5215b80eb 
-      Tags:
-        - Key: Name
-          Value: new udapeople
 
 Outputs:
   PublicDnsName:
