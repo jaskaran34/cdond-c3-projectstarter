@@ -1,17 +1,17 @@
 Description: >
-  UdaPeople backend stack.
+  Udapeople backend stack
 
 Parameters:
   ID:
-    Description: Unique identifier.
+    Description: Unique identifier
     Type: String
 
 Resources:
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupName: !Sub UdaPeople-${ID}
-      GroupDescription: Allow port 22 and port 3030.
+      GroupName: !Sub udapeople-secgroup-${ID}
+      GroupDescription: Allow port 22 (ssh), 3030 (node.js), 9090, 9093, 9100 (prometheus).
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 22
@@ -21,6 +21,21 @@ Resources:
           FromPort: 3030
           ToPort: 3030
           CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 9090
+          ToPort: 9090
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 9093
+          ToPort: 9093
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 9100
+          ToPort: 9100
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: !Sub udapeople-secgroup-${ID}
 
   EC2Instance:
     Type: AWS::EC2::Instance
@@ -30,6 +45,10 @@ Resources:
         - Ref: InstanceSecurityGroup
       KeyName: newkey
       ImageId: ami-0b70285e5215b80eb 
-      Tags:
-        - Key: Name
-          Value: !Sub backend-${ID}
+
+Outputs:
+  PublicDnsName:
+    Description: Server Public DNS Name
+    Value: !GetAtt EC2Instance.PublicDnsName
+    Export:
+      Name: !Sub "${AWS::StackName}-BackendPublicDnsName"
