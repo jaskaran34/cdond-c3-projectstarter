@@ -45,6 +45,9 @@ Resources:
         - Ref: InstanceSecurityGroup
       KeyName: udacity 
       ImageId: ami-0c2b8ca1dad447f8a 
+      Tags:
+        - Key: Name
+          Value: !Sub backend-${ID}
 
 Outputs:
   PublicDnsName:
