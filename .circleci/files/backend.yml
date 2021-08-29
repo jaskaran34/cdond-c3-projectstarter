@@ -44,7 +44,7 @@ Resources:
       SecurityGroups:
         - Ref: InstanceSecurityGroup
       KeyName: udacity 
-      ImageId: ami-0b70285e5215b80eb 
+      ImageId: ami-0c2b8ca1dad447f8a 
 
 Outputs:
   PublicDnsName:
