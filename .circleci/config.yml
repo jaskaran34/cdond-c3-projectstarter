@@ -46,8 +46,7 @@ jobs:
       - run:
           name: Test the code
           command: |
-            cd frontend
-            npm run test
+            pwd
                 
   test-backend:
     docker:
