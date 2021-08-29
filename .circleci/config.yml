@@ -10,6 +10,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
+            pwd
             cd frontend
             npm install
       - run:
