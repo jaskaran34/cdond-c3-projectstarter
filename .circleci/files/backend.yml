@@ -43,7 +43,6 @@ Resources:
       InstanceType: t2.micro
       SecurityGroups:
         - Ref: InstanceSecurityGroup
-      KeyName: newkey
       ImageId: ami-0b70285e5215b80eb 
 
 Outputs:
