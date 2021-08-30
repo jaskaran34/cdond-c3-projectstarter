@@ -42,7 +42,7 @@ commands:
             cat ./inventory
           when: on_fail
       - add_ssh_keys:
-          fingerprints: ["99:ed:e4:e1:58:f4:23:60:3f:81:54:b5:f2:01:a8:f7"] 
+          fingerprints: ["54:12:f2:60:5d:12:19:b8:59:ec:7b:d1:74:f5:1c:03:ff:02:4c:8e"] 
       - run:
           name: Revert the last migration
           command: |
@@ -206,7 +206,7 @@ jobs:
             echo ${PUBLIC_DNS} >> ./inventory
             cat ./inventory
       - add_ssh_keys:
-          fingerprints: ["99:ed:e4:e1:58:f4:23:60:3f:81:54:b5:f2:01:a8:f7"] 
+          fingerprints: ["54:12:f2:60:5d:12:19:b8:59:ec:7b:d1:74:f5:1c:03:ff:02:4c:8e"] 
       - run:
           name: Configure server via ansible to deploy the backend
           command: |
