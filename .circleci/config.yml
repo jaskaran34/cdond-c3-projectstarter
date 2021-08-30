@@ -206,7 +206,7 @@ jobs:
             echo ${PUBLIC_DNS} >> ./inventory
             cat ./inventory
       - add_ssh_keys:
-          fingerprints: ["94:c4:5c:d2:fe:3c:4c:e4:b4:a8:8f:bd:3d:3d:6a:3d"] 
+          fingerprints: ["ce:00:8a:1d:cb:13:a1:38:c3:06:57:e4:da:73:79:18"] 
       - run:
           name: Configure server via ansible to deploy the backend
           command: |
