@@ -188,32 +188,8 @@ jobs:
       - image: python:3.7-alpine3.11
     steps:
       - checkout
-      - run:
-          name: Install system dependencies
-          command: |
-            apk add --no-cache curl
-            apk add --no-cache --upgrade bash
-            apk add --no-cache --update ansible
-            apk add --no-cache openssh-client
-            pip3 install awscli
-      - run:
-          name: Get the public DNS of EC2 instance from https://memstash.io/
-          command: |
-            PUBLIC_DNS=$(curl -H "token: ${CIRCLE_WORKFLOW_ID}" --request GET https://api.memstash.io/values/public_dns)
-            echo ${PUBLIC_DNS}
-            cd .circleci/ansible/
-            echo "[all]" > ./inventory
-            echo ${PUBLIC_DNS} >> ./inventory
-            cat ./inventory
-      - add_ssh_keys:
-          fingerprints: ["4c:cc:c7:de:bf:36:fc:d8:13:50:4f:89:36:51:62:d0"] 
-      - run:
-          name: Configure server via ansible to deploy the backend
-          command: |
-            printenv >> ./backend/.env
-            cd .circleci/ansible/
-            ansible-playbook -i ./inventory deploy.yml
-     
+      - revert-migration
+      - destroy-aws-resource
 
   deploy-frontend:
     docker:
@@ -248,21 +224,5 @@ jobs:
 workflows:
   default:
     jobs:
-      - build-frontend
-      - build-backend
-      - test-frontend:
-          requires: [build-frontend]
-      - test-backend:
-          requires: [build-backend]
-      - scan-backend:
-          requires: [build-backend]
-      - scan-frontend:
-          requires: [build-frontend]  
-      - deploy-infrastructure:
-          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-      - deploy-backend:
-          requires: [deploy-infrastructure]
-   
+      - deploy-backend
             
-                
-
