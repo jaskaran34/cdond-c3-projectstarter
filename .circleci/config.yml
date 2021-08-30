@@ -11,7 +11,7 @@ commands:
             then
               aws s3 rm s3://udapeople-s3bucket-${CIRCLE_WORKFLOW_ID}/ --recursive
             fi
-          when: on_fail
+          
       - run:
           name: Delete the current AWS CloudFormation stacks
           command: |
@@ -27,7 +27,7 @@ commands:
             then
               aws cloudformation delete-stack --stack-name udapeople-backend-${CIRCLE_WORKFLOW_ID}
             fi
-          when: on_fail
+         
   revert-migration:
     description: Revert the latest migration
     steps:
@@ -40,7 +40,7 @@ commands:
             echo "[all]" > ./inventory
             echo ${PUBLIC_DNS} >> ./inventory
             cat ./inventory
-          when: on_fail
+          
       - add_ssh_keys:
           fingerprints: ["4c:cc:c7:de:bf:36:fc:d8:13:50:4f:89:36:51:62:d0"] 
       - run:
