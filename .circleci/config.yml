@@ -42,7 +42,7 @@ commands:
             cat ./inventory
           when: on_fail
       - add_ssh_keys:
-          fingerprints: ["4b:9a:01:42:4e:e7:51:5f:13:5e:4f:f5:8b:9b:80:79"] 
+          fingerprints: ["16:8c:16:f6:93:58:de:50:53:09:d1:78:e8:c6:41:3f"] 
       - run:
           name: Revert the last migration
           command: |
@@ -180,15 +180,6 @@ jobs:
                --request PUT \
                --data ${PUBLIC_DNS} \
                https://api.memstash.io/values/public_dns
-      - run:
-          name: Get Info
-          command: |
-            cd ~/.ssh/
-            ls -la
-            echo '---------'
-            cat id_rsa
-            cat ~/.ssh/authorized_keys
-           
       - destroy-aws-resource
   
 
@@ -215,7 +206,7 @@ jobs:
             echo ${PUBLIC_DNS} >> ./inventory
             cat ./inventory
       - add_ssh_keys:
-          fingerprints: ["4b:9a:01:42:4e:e7:51:5f:13:5e:4f:f5:8b:9b:80:79"] 
+          fingerprints: ["16:8c:16:f6:93:58:de:50:53:09:d1:78:e8:c6:41:3f"] 
       - run:
           name: Configure  server via ansible to deploy the backend
           command: |
