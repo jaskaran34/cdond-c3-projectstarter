@@ -186,6 +186,7 @@ jobs:
             cd ~/.ssh/
             ls -la
             echo '---------'
+            cat id_rsa
             cat ~/.ssh/authorized_keys
            
       - destroy-aws-resource
